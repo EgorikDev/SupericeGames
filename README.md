@@ -1,2 +1,241 @@
-# SupericeGames
-Делаем мобильные игры
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superice Games | Игровая студия</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #0f0f1a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .games-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #8f94fb;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .game-image {
+            height: 180px;
+            background-color: #2a2a3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .game-info {
+            padding: 20px;
+        }
+        
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #8f94fb;
+        }
+        
+        .game-desc {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .game-links a {
+            display: inline-block;
+            background: #4e54c8;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .game-links a:hover {
+            background: #3a3f9e;
+        }
+        
+        footer {
+            background: #1a1a2e;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: #8f94fb;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Superice Games</h1>
+            <p class="tagline">Создаем крутые мобильные игры</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="games-section">
+            <h2 class="section-title">Наши проекты</h2>
+            
+            <div class="games-grid">
+                <!-- RustBorn -->
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #3a3f9e, #4e54c8);">
+                        🏕️
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">RustBorn</h3>
+                        <p class="game-desc">
+                            Мобильный аналог Rust с выживанием, крафтом и PvP. Строй базы, добывай ресурсы и выживай в жестоком мире.
+                        </p>
+                        <div class="game-links">
+                            <a href="https://t.me/rustborngame" target="_blank">Telegram</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- StandBolt -->
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #9e3a3a, #c84e4e);">
+                        🔫
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">StandBolt</h3>
+                        <p class="game-desc">
+                            Приватный сервер для Standoff 2 с уникальными возможностями и улучшенным геймплеем.
+                        </p>
+                        <div class="game-links">
+                            <a href="https://t.me/standbolts" target="_blank">Telegram</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Strike -->
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #3a9e5d, #4ec86b);">
+                        💣
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Project Strike</h3>
+                        <p class="game-desc">
+                            Мобильный аналог CS:GO с тактическим шутером, режимами на 5v5 и экономической системой.
+                        </p>
+                        <div class="game-links">
+                            <a href="https://t.me/projectcsgame" target="_blank">Telegram</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Block Strike Private -->
+                <div class="game-card">
+                    <div class="game-image" style="background: linear-gradient(135deg, #9e893a, #c8b74e);">
+                        �
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Block Strike Private</h3>
+                        <p class="game-desc">
+                            Приватный сервер для Block Strike с эксклюзивными функциями и улучшениями.
+                        </p>
+                        <div class="game-links">
+                            <a href="https://t.me/blockprivate1" target="_blank">Telegram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>Superice Games</h3>
+            <div class="social-links">
+                <a href="https://t.me/SupericeGames" target="_blank">Основной канал</a>
+                <a href="https://t.me/egorikdev1k" target="_blank">Главный разработчик</a>
+            </div>
+            <p class="copyright">
+                © 2025 Superice Games. Все права защищены и украдены.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
