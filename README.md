@@ -4,164 +4,589 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superice Games | Игровая студия</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #A29BFE;
+            --dark: #1E1E2D;
+            --darker: #14141F;
+            --light: #F5F6FA;
+            --accent: #00CEC9;
+            --danger: #FF7675;
+            --success: #55EFC4;
+            --warning: #FDCB6E;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #0f0f1a;
-            color: #fff;
-            line-height: 1.6;
+            background-color: var(--darker);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
         
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Шапка */
         header {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            padding: 20px 0;
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            padding: 30px 0;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, rgba(108, 92, 231, 0) 70%);
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
         
         .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .tagline {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            color: var(--secondary);
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
             opacity: 0.8;
         }
         
+        /* Основной контент */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
         }
         
-        .games-section {
-            padding: 40px 0;
+        .section {
+            padding: 80px 0;
+            position: relative;
         }
         
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #8f94fb;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--light);
         }
         
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Карточки игр */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
         
         .game-card {
-            background: #1a1a2e;
-            border-radius: 10px;
+            background: rgba(30, 30, 45, 0.7);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeIn 0.6s ease-out;
         }
         
         .game-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.3);
+            border-color: rgba(108, 92, 231, 0.3);
         }
         
         .game-image {
-            height: 180px;
-            background-color: #2a2a3a;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-image::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 30, 45, 0.7), rgba(30, 30, 45, 0.9));
+        }
+        
+        .game-image i {
+            z-index: 1;
         }
         
         .game-info {
-            padding: 20px;
+            padding: 25px;
+            position: relative;
         }
         
         .game-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #8f94fb;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--light);
+            position: relative;
+        }
+        
+        .game-title::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            margin-top: 10px;
+            border-radius: 2px;
         }
         
         .game-desc {
-            margin-bottom: 15px;
-            opacity: 0.8;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-size: 0.95rem;
         }
         
-        .game-links a {
-            display: inline-block;
-            background: #4e54c8;
+        .game-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .game-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
             color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 10px 18px;
+            border-radius: 8px;
             text-decoration: none;
-            margin-right: 10px;
             font-size: 0.9rem;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
         
-        .game-links a:hover {
-            background: #3a3f9e;
+        .game-link:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
         }
         
-        footer {
-            background: #1a1a2e;
-            padding: 30px 0;
+        .game-link.secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-link.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Команда */
+        .team-section {
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            padding: 80px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
             text-align: center;
-            margin-top: 50px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .social-links {
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(108, 92, 231, 0.3);
+        }
+        
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+        
+        .member-role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .member-bio {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .member-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .member-socials a {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .member-socials a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--darker));
+            padding: 60px 0 30px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        .footer-logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .footer-about {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            font-size: 0.8rem;
+        }
+        
+        .footer-socials {
+            display: flex;
+            gap: 15px;
             margin-top: 20px;
         }
         
-        .social-links a {
-            color: #8f94fb;
-            margin: 0 10px;
+        .footer-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
             font-size: 1.2rem;
-            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-social:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .copyright {
-            margin-top: 20px;
             opacity: 0.7;
             font-size: 0.9rem;
         }
         
+        /* Кнопка "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
             .games-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Шапка -->
     <header>
-        <div class="container">
-            <h1 class="logo">Superice Games</h1>
-            <p class="tagline">Создаем крутые мобильные игры</p>
+        <div class="container header-content">
+            <h1 class="logo">
+                <span class="logo-icon"><i class="fas fa-bolt"></i></span>
+                Superice Games
+            </h1>
+            <p class="tagline">Создаем захватывающие игровые впечатления с 2024 года</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Игровых проекта</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Игроков</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1+</div>
+                    <div class="stat-label">Год работы</div>
+                </div>
+            </div>
         </div>
     </header>
     
-    <div class="container">
-        <section class="games-section">
+    <!-- Наши игры -->
+    <section class="section">
+        <div class="container">
             <h2 class="section-title">Наши проекты</h2>
             
             <div class="games-grid">
                 <!-- RustBorn -->
                 <div class="game-card">
                     <div class="game-image" style="background: linear-gradient(135deg, #3a3f9e, #4e54c8);">
-                        🏕️
+                        <i class="fas fa-campground"></i>
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">RustBorn</h3>
@@ -169,7 +594,12 @@
                             Мобильный аналог Rust с выживанием, крафтом и PvP. Строй базы, добывай ресурсы и выживай в жестоком мире.
                         </p>
                         <div class="game-links">
-                            <a href="https://t.me/rustborngame" target="_blank">Telegram</a>
+                            <a href="https://t.me/rustborngame" target="_blank" class="game-link">
+                                <i class="fab fa-telegram"></i> Telegram
+                            </a>
+                            <a href="#" class="game-link secondary">
+                                <i class="fas fa-download"></i> Скачать
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -177,15 +607,20 @@
                 <!-- StandBolt -->
                 <div class="game-card">
                     <div class="game-image" style="background: linear-gradient(135deg, #9e3a3a, #c84e4e);">
-                        🔫
+                        <i class="fas fa-gun"></i>
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">StandBolt</h3>
                         <p class="game-desc">
-                            Приватный сервер для Standoff 2 с уникальными возможностями и улучшенным геймплеем.
+                            Приватный сервер для Standoff 2 с уникальными возможностями, улучшенным геймплеем и эксклюзивным контентом.
                         </p>
                         <div class="game-links">
-                            <a href="https://t.me/standbolts" target="_blank">Telegram</a>
+                            <a href="https://t.me/standbolts" target="_blank" class="game-link">
+                                <i class="fab fa-telegram"></i> Telegram
+                            </a>
+                            <a href="#" class="game-link secondary">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -193,15 +628,20 @@
                 <!-- Project Strike -->
                 <div class="game-card">
                     <div class="game-image" style="background: linear-gradient(135deg, #3a9e5d, #4ec86b);">
-                        💣
+                        <i class="fas fa-bomb"></i>
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">Project Strike</h3>
                         <p class="game-desc">
-                            Мобильный аналог CS:GO с тактическим шутером, режимами на 5v5 и экономической системой.
+                            Мобильный тактический шутер в духе CS:GO с режимами 5v5, экономической системой и профессиональными матчами.
                         </p>
                         <div class="game-links">
-                            <a href="https://t.me/projectcsgame" target="_blank">Telegram</a>
+                            <a href="https://t.me/projectcsgame" target="_blank" class="game-link">
+                                <i class="fab fa-telegram"></i> Telegram
+                            </a>
+                            <a href="#" class="game-link secondary">
+                                <i class="fas fa-play"></i> Играть
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -209,33 +649,201 @@
                 <!-- Block Strike Private -->
                 <div class="game-card">
                     <div class="game-image" style="background: linear-gradient(135deg, #9e893a, #c8b74e);">
-                        �
+                        <i class="fas fa-cube"></i>
                     </div>
                     <div class="game-info">
                         <h3 class="game-title">Block Strike Private</h3>
                         <p class="game-desc">
-                            Приватный сервер для Block Strike с эксклюзивными функциями и улучшениями.
+                            Приватный сервер для Block Strike с эксклюзивными функциями, улучшенной графикой и уникальными режимами игры.
                         </p>
                         <div class="game-links">
-                            <a href="https://t.me/blockprivate1" target="_blank">Telegram</a>
+                            <a href="https://t.me/blockprivate1" target="_blank" class="game-link">
+                                <i class="fab fa-telegram"></i> Telegram
+                            </a>
+                            <a href="#" class="game-link secondary">
+                                <i class="fas fa-users"></i> Сообщество
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
     
+    <!-- Наша команда -->
+    <section class="section team-section">
+        <div class="container">
+            <h2 class="section-title">Наша команда</h2>
+            
+            <div class="team-grid">
+                <!-- B1TNEYM -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="B1TNEYM" class="member-avatar">
+                    <h3 class="member-name">B1TNEYM</h3>
+                    <p class="member-role">Главный разработчик</p>
+                    <p class="member-bio">Разработчик сайтов и программ на HTML, Python. Создает основную функциональность наших проектов.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <!-- VITAMIN -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="VITAMIN" class="member-avatar">
+                    <h3 class="member-name">VITAMIN</h3>
+                    <p class="member-role">Маркетинг и PR</p>
+                    <p class="member-bio">Отвечает за продвижение игр, рекламу приватных серверов и взаимодействие с сообществом.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Андрей -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Андрей" class="member-avatar">
+                    <h3 class="member-name">Андрей (Xayrllano)</h3>
+                    <p class="member-role">Unity Developer</p>
+                    <p class="member-bio">Программист на C#, занимается разработкой игр на Unity и созданием пользовательских интерфейсов.</p>
+                    <div class="member-socials">
+                        <a href="https://www.youtube.com/channel/UC6EcBfP8VFhuLjrfZyjKCpw" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- HA3BAHHblU_dev -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="HA3BAHHblU" class="member-avatar">
+                    <h3 class="member-name">HA3BAHHblU_dev</h3>
+                    <p class="member-role">Тестировщик</p>
+                    <p class="member-bio">Тестирует приватные серверы StandBolt, выявляет баги и предлагает улучшения игрового процесса.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Popovars -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Popovars" class="member-avatar">
+                    <h3 class="member-name">Popovars</h3>
+                    <p class="member-role">Администратор</p>
+                    <p class="member-bio">Администрирует приватный сервер Project Strike, отвечает за его стабильную работу и развитие.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Egorik -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Egorik" class="member-avatar">
+                    <h3 class="member-name">Egorik</h3>
+                    <p class="member-role">Разработчик</p>
+                    <p class="member-bio">Участвует в разработке различных проектов студии, отвечает за техническую реализацию функций.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Подвал -->
     <footer>
         <div class="container">
-            <h3>Superice Games</h3>
-            <div class="social-links">
-                <a href="https://t.me/SupericeGames" target="_blank">Основной канал</a>
-                <a href="https://t.me/egorikdev1k" target="_blank">Главный разработчик</a>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="footer-logo-icon"><i class="fas fa-bolt"></i></span>
+                        Superice Games
+                    </div>
+                    <p class="footer-about">
+                        Молодая и амбициозная игровая студия, создающая уникальные игровые проекты 
+                        и приватные серверы для популярных мобильных игр.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://www.youtube.com/@SupericeGamesStudio" target="_blank" class="footer-social">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/SupericeGames" target="_blank" class="footer-social">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" target="_blank" class="footer-social">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Наши проекты</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> RustBorn</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> StandBolt</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Project Strike</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Block Strike Private</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Команда</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> B1TNEYM</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> VITAMIN</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Андрей (Xayrllano)</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Popovars</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Egorik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:supericegames@example.com"><i class="fas fa-envelope"></i> supericegames@example.com</a></li>
+                        <li><a href="https://t.me/egorikdev" target="_blank"><i class="fab fa-telegram"></i> @egorikdev</a></li>
+                        <li><a href="https://t.me/tapatasik" target="_blank"><i class="fab fa-telegram"></i> @tapatasik</a></li>
+                        <li><a href="https://t.me/block766" target="_blank"><i class="fab fa-telegram"></i> @block766</a></li>
+                    </ul>
+                </div>
             </div>
-            <p class="copyright">
-                © 2025 Superice Games. Все права защищены и украдены.
-            </p>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2024 Superice Games. Все права защищены.</p>
+            </div>
         </div>
     </footer>
+    
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // Кнопка "Наверх"
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Анимация при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.game-card, .team-member');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
 </body>
 </html>
