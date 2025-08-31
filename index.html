@@ -44,6 +44,12 @@
             100% { transform: scale(1); }
         }
         
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
         /* Шапка */
         header {
             background: linear-gradient(135deg, var(--dark), var(--darker));
@@ -88,6 +94,7 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: float 3s ease-in-out infinite;
         }
         
         .tagline {
@@ -114,6 +121,12 @@
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
         
         .stat-number {
@@ -290,12 +303,31 @@
             transition: all 0.3s;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-member::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, rgba(108, 92, 231, 0) 70%);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .team-member:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             border-color: rgba(108, 92, 231, 0.3);
+        }
+        
+        .team-member:hover::before {
+            opacity: 1;
         }
         
         .member-avatar {
@@ -306,12 +338,16 @@
             margin: 0 auto 15px;
             border: 3px solid var(--primary);
             box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            position: relative;
+            z-index: 1;
         }
         
         .member-name {
             font-size: 1.3rem;
             margin-bottom: 5px;
             color: var(--light);
+            position: relative;
+            z-index: 1;
         }
         
         .member-role {
@@ -319,18 +355,24 @@
             font-size: 0.9rem;
             margin-bottom: 15px;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
         
         .member-bio {
             font-size: 0.9rem;
             opacity: 0.8;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
         
         .member-socials {
             display: flex;
             justify-content: center;
             gap: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .member-socials a {
@@ -656,7 +698,6 @@
                         <div class="game-links">
                             <a href="https://t.me/blockprivate1" target="_blank" class="game-link">
                                 <i class="fab fa-telegram"></i> Telegram
-
                             </a>
                         </div>
                     </div>
@@ -732,26 +773,35 @@
                     <img src="https://via.placeholder.com/150" alt="Egorik" class="member-avatar">
                     <h3 class="member-name">EgorikDev</h3>
                     <p class="member-role">Создатель</p>
-                    <p class="member-bio">Основатель и ведущий разработчик Superice Games. Специалист по созданию игр 
-        и веб-платформ с многолетним опытом. Разрабатываю игры на Unity (C#), 
-        создаю серверные решения на Python, пишу скрипты на Lua для модификации игр.
-        Автор архитектуры этого сайта и многих других проектов студии.</p>
+                    <p class="member-bio">Основатель и ведущий разработчик Superice Games. Специалист по созданию игр и веб-платформ с многолетним опытом.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Ядерный -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Ядерный" class="member-avatar">
+                    <h3 class="member-name">Ядерный</h3>
+                    <p class="member-role">Help Dev</p>
+                    <p class="member-bio">Помогает гл.разработчику, предоставляет исходники и все модификации.</p>
+                    <div class="member-socials">
+                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- fear28 -->
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="fear28" class="member-avatar">
+                    <h3 class="member-name">fear28</h3>
+                    <p class="member-role">C# Developer</p>
+                    <p class="member-bio">Unity разработчик с двухлетним опытом, имеет несколько успешных проектов. Участник Будке Щавелия с ноября 2024 года.</p>
                     <div class="member-socials">
                         <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Ядерный -->
-         <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Ядерный" class="member-avatar">
-                    <h3 class="member-name">Ядерный</h3>
-                    <p class="member-role">Help Dev</p>
-                    <p class="member-bio">Помогает гл.разработчику даёт исходники и все модификации.</p>
-                    <div class="member-socials">
-                        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
     </section>
     
     <!-- Подвал -->
@@ -796,6 +846,7 @@
                         <li><a href="#"><i class="fas fa-chevron-right"></i> Popovars</a></li>
                         <li><a href="#"><i class="fas fa-chevron-right"></i> Egorik</a></li>
                         <li><a href="#"><i class="fas fa-chevron-right"></i> Ядерный</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> fear28</a></li>
                     </ul>
                 </div>
                 
